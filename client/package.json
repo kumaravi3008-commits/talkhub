@@ -34,7 +34,7 @@
     "xss": "^1.0.8"
   },
   "devDependencies": {
-    "cross-env": "^7.0.6",
+    "cross-env": "^7.0.3",
     "shave": "^2.5.10"
   },
   "scripts": {
