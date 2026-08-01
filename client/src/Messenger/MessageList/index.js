@@ -8,6 +8,8 @@ import { useHistory, Link } from 'react-router-dom';
 import './MessageList.css';
 import io from 'socket.io-client'
 import {baseUrl} from '../../shared/basUrl'
+import {server_url} from '../../Containers/Room/Helpers/server_url'
+import {parseJSON} from '../../shared/api'
 import {peerConnectionConfig} from '../../Containers/Room/Helpers/peerConnectionConfig';
 
 export default function MessageList(props) {
@@ -53,9 +55,11 @@ export default function MessageList(props) {
         method: 'GET',
         headers: myHeader
       })
-      .then(response => response.json())
+      .then(response => parseJSON(response))
       .then((response) => {
         if(response.error) return;
+          // Guard against empty/non-array responses so we never crash
+          if (!Array.isArray(response)) return;
           let tempMessages = response.map(result => {
             return {
               id: result._id,
@@ -100,7 +104,7 @@ export default function MessageList(props) {
 	}
 
   const connectToSocketServer = () => {
-    const socket = io.connect(baseUrl, {secure: true});
+    const socket = io.connect(server_url, {secure: true});
     setSocket(socket);
     // console.log(currsocket);
 

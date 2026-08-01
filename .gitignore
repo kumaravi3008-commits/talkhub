@@ -5,8 +5,10 @@ node_modules/
 # Environment files
 .env
 .env.*
+!.env.example
 server/.env
 client/.env
+!.env.example
 
 # Production builds
 client/build/

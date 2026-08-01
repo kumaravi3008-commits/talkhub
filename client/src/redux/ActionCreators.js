@@ -1,5 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/basUrl';
+import { parseJSON } from '../shared/api';
 
 export const requestLogin = (creds) => {
     return {
@@ -45,7 +46,7 @@ export const loginUser = (creds) => (dispatch) => {
         error => {
             throw error;
         })
-    .then(response => response.json())
+    .then(response => parseJSON(response))
     .then(response => {
         if (response.success) {
             // If login was successful, set the token in local storage
@@ -59,7 +60,10 @@ export const loginUser = (creds) => (dispatch) => {
         else {
             var error = new Error('Error ' + response.status);
             error.response = response;
-            document.querySelector('.errorDisplay').innerHTML = "An error occured !!";
+            const errorDisplay = document.querySelector('.errorDisplay');
+            if (errorDisplay) {
+                errorDisplay.innerHTML = "An error occured !!";
+            }
             throw error;
         }
     })

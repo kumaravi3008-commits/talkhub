@@ -1,6 +1,7 @@
 import {React, useState} from 'react'
 import './Signup.css';
 import {baseUrl} from '../../shared/basUrl';
+import {parseJSON} from '../../shared/api';
 
 function Signup(props) {
     const [formData, setFormData] = useState({});
@@ -16,14 +17,19 @@ function Signup(props) {
         };
         
         try {
-            const response = await fetch(baseUrl + 'users/signup', requestOptions);
-            const result = await response.json();
+           console.log("API URL:", baseUrl + 'users/signup');
+
+const response = await fetch(baseUrl + 'users/signup', requestOptions);
             
-            if (result.err) {
-                setErrors({ general: result.err.message });
+            // Parse safely - handles empty responses (avoids "Unexpected end of JSON input")
+            const result = await parseJSON(response);
+            
+            if (!response.ok || result.err) {
+                const serverMessage = result.err?.message || result.status || `Server error (${response.status})`;
+                setErrors({ general: serverMessage });
                 setSuccessMessage('');
             } else {
-                setSuccessMessage(result.status);
+                setSuccessMessage(result.status || 'Registration successful!');
                 setErrors({});
                 // Auto close after success
                 setTimeout(() => {

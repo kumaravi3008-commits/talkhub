@@ -7,6 +7,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { loginUser, logoutUser } from './redux/ActionCreators';
 import {baseUrl} from './shared/basUrl';
+import {parseJSON} from './shared/api';
 import ChatApp from './Messenger/App/index';
 
 const mapStateToProps = state => {
@@ -45,10 +46,10 @@ class AppContent extends Component {
 				headers: myHeaders
 			});
 			
-			const data = await response.json();
+			const data = await parseJSON(response);
 			console.log("Token validation:", data);
 			
-			if (!data.success && !data.error) {
+			if (!response.ok && !data.success) {
 				this.props.logoutUser();
 			} else {
 				this.setState({ tokenValidated: true });

@@ -6,6 +6,7 @@ import Toolbar from '../Toolbar';
 import ToolbarButton from '../ToolbarButton';
 import './ConversationList.css';
 import {baseUrl} from '../../shared/basUrl'
+import {parseJSON} from '../../shared/api'
 import MyDropdown from './Dropdown'
 
 export default function ConversationList(props) {
@@ -30,8 +31,10 @@ export default function ConversationList(props) {
       method: 'GET',
       headers: myHeader
     })
-    .then(response => response.json())
+    .then(response => parseJSON(response))
     .then(response => {
+        if (response.error) return;
+        if (!Array.isArray(response)) return;
         let newConversations = response.filter(resp=>{
           if(resp.length!==5) return false;
           return true;
@@ -42,7 +45,8 @@ export default function ConversationList(props) {
           };
         });
         setConversations([...conversations, ...newConversations])
-    });
+    })
+    .catch((err) => console.error('Failed to fetch conversations:', err));
   }
     return (
       <div className="conversation-list">

@@ -1,1 +1,19 @@
-node_modules
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# Keep the example env template tracked
+!.env.example
+
+# Production builds
+build/
+
+# Misc
+*.log
+.DS_Store
+
