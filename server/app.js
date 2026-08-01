@@ -55,14 +55,15 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:8000';
 // maintaining cors ( cross origin resource sharing ) / vulnerabilty
 app.use(cors({
 	origin: [
-		"http://localhost:8000", 
-		"http://localhost:3000", 
-		"http://192.168.1.9:8000", 
-		"http://192.168.1.9:3000",
-		"https://shubhankteams.netlify.app",
-		process.env.FRONTEND_URL
-	].filter(Boolean),
-	methods: ["GET", "POST", "PUT", "DELETE"],
+    "http://localhost:8000",
+    "http://localhost:3000",
+    "http://192.168.1.9:8000",
+    "http://192.168.1.9:3000",
+    "https://shubhankteams.netlify.app",
+    "https://talkhub-client.vercel.app",
+    process.env.FRONTEND_URL
+].filter(Boolean),
+	methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 	credentials: true
 }));
 app.use(bodyParser.json())
