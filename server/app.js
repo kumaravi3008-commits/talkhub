@@ -17,6 +17,10 @@ var config = require('./config');
 var authenticate = require('./authenticate');
 
 const url = config.mongoUrl;
+
+// Redact credentials before printing the URI so secrets never reach logs.
+const redactMongoUrl = (uri) => uri ? uri.replace(/\/\/([^:]+):([^@]+)@/, '//$1:***@') : uri;
+
 mongoose.connect(url, {
         useCreateIndex: true,
         useNewUrlParser: true,
@@ -24,7 +28,10 @@ mongoose.connect(url, {
         useFindAndModify: false,
 })
 .then(() => console.log("Database connected..."))
-.catch((error) => console.log(error.message));
+.catch((error) => {
+        console.error('[DB CONNECTION ERROR] Failed to connect to MongoDB at:', redactMongoUrl(url));
+        console.error('[DB CONNECTION ERROR] Details:', error);
+});
 
 var server = http.createServer(app);
 var io = require('socket.io')(server, {
@@ -259,9 +266,14 @@ app.use('/api/groups', groupsRouter);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
+	// 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
+	const dbStates = ['disconnected', 'connected', 'connecting', 'disconnecting'];
+	const dbState = mongoose.connection.readyState;
+
 	res.json({ 
 		status: 'OK', 
 		message: 'TalkHub Backend Server is running',
+		db: dbStates[dbState] || 'unknown',
 		timestamp: new Date().toISOString()
 	});
 });
