@@ -1,6 +1,6 @@
-# 🎥 Shubh Meet
+# 🎥 TalkHub
 
-A modern, full-stack video conferencing application with Microsoft Teams-inspired design. Built with React, Express.js, Socket.IO, MongoDB, and WebRTC.
+A modern, full-stack video conferencing application with a polished collaborative design. Built with React, Express.js, Socket.IO, MongoDB, and WebRTC.
 
 ## 🚀 Features
 
@@ -18,7 +18,7 @@ A modern, full-stack video conferencing application with Microsoft Teams-inspire
 This is a **separated monorepo** with independently deployable frontend and backend:
 
 ```
-shubh-meet/
+talkhub/
 ├── client/          # React Frontend (Port 8000)
 ├── server/          # Express Backend (Port 4001)
 ├── package.json     # Workspace coordinator
@@ -48,8 +48,8 @@ shubh-meet/
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/your-username/shubh-meet.git
-cd shubh-meet
+git clone https://github.com/your-username/talkhub.git
+cd talkhub
 ```
 
 ### 2. Install All Dependencies
@@ -262,7 +262,7 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 If you encounter any issues or have questions:
 
 1. Check the [Troubleshooting](#-troubleshooting) section
-2. Search existing [GitHub Issues](https://github.com/your-username/shubh-meet/issues)
+2. Search existing [GitHub Issues](https://github.com/your-username/talkhub/issues)
 3. Create a new issue with detailed information
 
 ## ⭐ Acknowledgments

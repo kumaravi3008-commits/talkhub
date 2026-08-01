@@ -1,7 +1,7 @@
 {
-	"name": "shubh-meet",
+	"name": "talkhub",
 	"version": "1.0.0",
-	"description": "Modern video conferencing application with Microsoft Teams-inspired design",
+	"description": "Modern video conferencing application with TalkHub branding",
 	"private": true,
 	"workspaces": [
 		"client",
@@ -30,7 +30,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/your-username/shubh-meet.git"
+		"url": "git+https://github.com/your-username/talkhub.git"
 	},
 	"keywords": [
 		"video-conference",
@@ -46,7 +46,7 @@
 	"author": "Shubhank Kulshrestha",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/your-username/shubh-meet/issues"
+		"url": "https://github.com/your-username/talkhub/issues"
 	},
-	"homepage": "https://github.com/your-username/shubh-meet#readme"
+	"homepage": "https://github.com/your-username/talkhub#readme"
 }

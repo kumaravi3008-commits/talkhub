@@ -1,4 +1,4 @@
-# 🚀 Shubh Meet Deployment Guide
+# 🚀 TalkHub Deployment Guide
 
 ## Overview
 This guide will help you deploy your video conferencing app to production using:
@@ -130,7 +130,7 @@ This guide will help you deploy your video conferencing app to production using:
 
 1. **Test Backend**
    - Visit: `https://your-railway-app.up.railway.app/api/health`
-   - Should return: `{"status":"OK","message":"Shubh Meet Backend Server is running"}`
+   - Should return: `{"status":"OK","message":"TalkHub Backend Server is running"}`
 
 2. **Test Frontend**
    - Visit: `https://your-app-name.netlify.app`

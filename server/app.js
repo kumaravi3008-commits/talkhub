@@ -260,7 +260,7 @@ app.use('/api/groups', groupsRouter);
 app.get('/api/health', (req, res) => {
 	res.json({ 
 		status: 'OK', 
-		message: 'Shubh Meet Backend Server is running',
+		message: 'TalkHub Backend Server is running',
 		timestamp: new Date().toISOString()
 	});
 });
@@ -287,7 +287,7 @@ app.use(function(err, req, res, next) {
 });
 
 server.listen(app.get('port'), () => {
-	console.log(`🚀 Shubh Meet Backend Server listening on port ${app.get('port')}`);
+	console.log(`🚀 TalkHub Backend Server listening on port ${app.get('port')}`);
 	console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
 	console.log(`📡 Socket.IO enabled with CORS for frontend`);
 }); 

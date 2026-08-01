@@ -23,8 +23,8 @@ function Header(props) {
 			<Navbar light expand='md'>
 				<div className='container-fluid'>
 					<NavbarBrand href='/home' className='brand-container'>
-						<img src={mslogo} alt='Shubh Meet Logo' className='brand-logo' />
-						<span className='brand-text'>Shubh Meet</span>
+						<img src={mslogo} alt='TalkHub Logo' className='brand-logo' />
+						<span className='brand-text'>TalkHub</span>
 					</NavbarBrand>
 					<NavbarToggler className='first-Button' onClick={toggle}>
 						<div className={cname}>

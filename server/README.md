@@ -1,6 +1,6 @@
-# Shubh Meet - Backend Server
+# TalkHub - Backend Server
 
-A robust backend server for Shubh Meet video conferencing application built with Express.js, Socket.IO, MongoDB, and WebRTC.
+A robust backend server for the TalkHub video conferencing application built with Express.js, Socket.IO, MongoDB, and WebRTC.
 
 ## 🚀 Features
 

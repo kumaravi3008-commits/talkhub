@@ -21,8 +21,8 @@ function NavbarMain(props) {
 				<Navbar color='light' light expand='md'>
 					<div className='container-fluid'>
 						<NavbarBrand href='/home' className='brand-container'>
-							<img src={mslogo} alt='Shubh Meet Logo' className='brand-logo' />
-							<span className='brand-text'>Shubh Meet</span>
+							<img src={mslogo} alt='TalkHub Logo' className='brand-logo' />
+							<span className='brand-text'>TalkHub</span>
 						</NavbarBrand>
 						<NavbarToggler className='first-Button' onClick={toggle}>
 							<div className={cname}>
@@ -49,7 +49,7 @@ function NavbarMain(props) {
 			</section>
 			<div className='info'>
 				<p>
-					Now use Shubh Teams with family and friends to call, chat, and make plans.
+					Now use TalkHub with family and friends to call, chat, and make plans.
 					&nbsp;
 					<a href='/home'>Learn more {'>'}</a>
 				</p>

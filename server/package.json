@@ -1,11 +1,11 @@
 {
-  "name": "shubh-meet-backend",
+  "name": "talkhub-backend",
   "version": "1.0.0",
-  "description": "Backend server for Shubh Meet - Video conferencing application",
+  "description": "Backend server for TalkHub - Video conferencing application",
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node app.js",
-    "dev": "NODE_ENV=development nodemon app.js",
+    "dev": "cross-env NODE_ENV=development nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "xss": "^1.0.8"
   },
   "devDependencies": {
+    "cross-env": "^7.0.6",
     "nodemon": "^2.0.2"
   },
   "engines": {

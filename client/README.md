@@ -1,6 +1,6 @@
-# Shubh Meet - Frontend
+# TalkHub - Frontend
 
-A modern, responsive React frontend for Shubh Meet video conferencing application with Microsoft Teams-inspired design.
+A modern, responsive React frontend for the TalkHub video conferencing application with a polished collaborative design.
 
 ## 🚀 Features
 
