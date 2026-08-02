@@ -17,21 +17,43 @@ var config = require('./config');
 var authenticate = require('./authenticate');
 
 const url = config.mongoUrl;
+const mongoUrlError = config.mongoUrlError;
 
 // Redact credentials before printing the URI so secrets never reach logs.
 const redactMongoUrl = (uri) => uri ? uri.replace(/\/\/([^:]+):([^@]+)@/, '//$1:***@') : uri;
 
-mongoose.connect(url, {
-        useCreateIndex: true,
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-})
-.then(() => console.log("Database connected..."))
-.catch((error) => {
-        console.error('[DB CONNECTION ERROR] Failed to connect to MongoDB at:', redactMongoUrl(url));
-        console.error('[DB CONNECTION ERROR] Details:', error);
-});
+// ===== DEBUG START =====
+console.log("========== MONGO DEBUG ==========");
+console.log("config.mongoUrlError:", mongoUrlError);
+console.log("process.env.MONGO_URL:", JSON.stringify(process.env.MONGO_URL));
+console.log("process.env.MONGO_URI:", JSON.stringify(process.env.MONGO_URI));
+console.log("process.env.MONGODB_URI:", JSON.stringify(process.env.MONGODB_URI));
+console.log("config.mongoUrl:", JSON.stringify(url));
+console.log("=================================");
+// ===== DEBUG END =====
+
+// Fail fast...
+
+
+// Fail fast with the REAL cause instead of an opaque MongoParseError from the
+// legacy mongodb 3.7 driver's url.parse().
+if (mongoUrlError) {
+        console.error('[DB CONNECTION ERROR] MongoDB URI is invalid. Signup and all DB routes will fail until this is fixed.');
+        console.error('[DB CONNECTION ERROR] Fix in Render -> Environment Variables -> MONGODB_URI / MONGO_URL / MONGO_URI.');
+} else {
+        mongoose.connect(url, {
+                useCreateIndex: true,
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                useFindAndModify: false,
+                serverSelectionTimeoutMS: 15000,
+        })
+        .then(() => console.log("Database connected..."))
+        .catch((error) => {
+                console.error('[DB CONNECTION ERROR] Failed to connect to MongoDB at:', redactMongoUrl(url));
+                console.error('[DB CONNECTION ERROR] Details:', error);
+        });
+}
 
 var server = http.createServer(app);
 var io = require('socket.io')(server, {
@@ -270,12 +292,18 @@ app.get('/api/health', (req, res) => {
 	const dbStates = ['disconnected', 'connected', 'connecting', 'disconnecting'];
 	const dbState = mongoose.connection.readyState;
 
-	res.json({ 
-		status: 'OK', 
+	const health = {
+		status: 'OK',
 		message: 'TalkHub Backend Server is running',
 		db: dbStates[dbState] || 'unknown',
+		// Surface the MongoDB URI validation state so Render logs / health checks
+		// show the REAL cause instead of an opaque MongoParseError.
+		dbConfigValid: !config.mongoUrlError,
+		dbConfigError: config.mongoUrlError || null,
 		timestamp: new Date().toISOString()
-	});
+	};
+
+	res.json(health);
 });
 
 // catch 404 and forward to error handler
